@@ -1,0 +1,92 @@
+﻿.beer-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s;
+}
+
+.beer-card:hover {
+  transform: translateY(-5px);
+}
+
+.beer-name {
+  color: #4B0082;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.beer-type {
+  color: #FF8C00;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.beer-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.beer-detail {
+  text-align: center;
+}
+
+.detail-value {
+  font-weight: bold;
+  color: #4B0082;
+  font-size: 1.1rem;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.beer-description {
+  color: #333;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.beer-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background-color: #FF8C00;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #E67E00;
+}
+
+.btn-secondary {
+  background-color: #4B0082;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5A2D8C;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #bd2130;
+}
