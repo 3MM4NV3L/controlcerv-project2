@@ -58,7 +58,7 @@ npm install
 
 **Backend (.env)**
 \`\`\`env
-MONGODB_URI=mongodb+srv://usuario:password@cluster0.xxxxx.mongodb.net/controlcerv
+MONGODB_URI=mongodb+srv
 PORT=5000
 JWT_SECRET=tu_clave_secreta_jwt
 NODE_ENV=development
