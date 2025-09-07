@@ -4,9 +4,10 @@ import axios from 'axios';
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 const api = axios.create({
   baseURL: API_BASE_URL,
+  headers: { "Content-Type": "application/json" } 
 });
 
-// Funciones para las operaciones CRUD
+// Funciones CRUD
 export const getBeers = () => api.get('/beers');
 export const getBeerById = (id) => api.get('/beers/' + id);
 export const createBeer = (beerData) => api.post('/beers', beerData);

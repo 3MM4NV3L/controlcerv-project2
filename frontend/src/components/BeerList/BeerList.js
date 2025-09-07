@@ -1,55 +1,162 @@
-﻿import React, { useState, useEffect } from 'react';
-import BeerCard from '../BeerCard/BeerCard';
-import { getBeers, deleteBeer } from '../../services/api';
-import './BeerList.css';
+﻿import { useEffect, useMemo, useState } from "react";
+import { getBeers, createBeer, updateBeer, deleteBeer } from "./api";
+import BeerForm from "./BeerForm";
+import BeerCard from "./BeerCard";
+import "./BeerList.css";
 
-const BeerList = ({ onEditBeer }) => {
+export default function BeerList() {
   const [beers, setBeers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [q, setQ] = useState("");
+  const [editing, setEditing] = useState(null);
+  const [view, setView] = useState(null); // para modal "Ver Información"
 
-  useEffect(() => {
-    fetchBeers();
-  }, []);
-
-  const fetchBeers = async () => {
+  const load = async () => {
     try {
-      const response = await getBeers();
-      setBeers(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching beers:', error);
+      setLoading(true);
+      setError("");
+      const res = await getBeers(); // tu api.js: GET /beers
+      setBeers(res.data || []);
+    } catch (e) {
+      setError(e?.response?.data?.message || "Error cargando cervezas");
+    } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Búsqueda en cliente (por nombre/tipo/descr)
+  const filtered = useMemo(() => {
+    const term = q.trim().toLowerCase();
+    if (!term) return beers;
+    return beers.filter((b) =>
+      [b.nombre, b.tipo, b.descripcion].some((v) =>
+        String(v || "").toLowerCase().includes(term)
+      )
+    );
+  }, [beers, q]);
+
+  const handleSave = async (payload) => {
+    // payload debe respetar tu modelo: nombre, tipo, alcohol, ibu, descripcion, imagen, precio, stock, fechaProduccion, fechaCaducidad
+    if (editing?._id) {
+      await updateBeer(editing._id, payload);
+      setEditing(null);
+    } else {
+      await createBeer(payload);
+    }
+    await load();
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar esta cerveza?')) {
-      try {
-        await deleteBeer(id);
-        setBeers(beers.filter(beer => beer.id !== id));
-      } catch (error) {
-        console.error('Error deleting beer:', error);
-      }
-    }
+    if (!window.confirm("¿Eliminar esta cerveza?")) return;
+    await deleteBeer(id);
+    await load();
   };
 
-  if (loading) return <div className="loading">Cargando cervezas...</div>;
-
   return (
-    <div className="beer-list">
-      <h2>Lista de Cervezas</h2>
-      <div className="beer-grid">
-        {beers.map(beer => (
-          <BeerCard
-            key={beer.id}
-            beer={beer}
-            onEdit={onEditBeer}
-            onDelete={handleDelete}
-          />
-        ))}
+    <div className="beerlist container">
+      <h2 className="section-title">Gestión de Cervezas</h2>
+
+      <div className="beerlist-toolbar">
+        <input
+          className="beerlist-search"
+          placeholder="Buscar por nombre / tipo / descripción…"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+        />
+        {editing ? (
+          <span className="beerlist-mode">
+            Editando: <b>{editing.nombre}</b>
+          </span>
+        ) : (
+          <span className="beerlist-mode">Crear nueva cerveza</span>
+        )}
       </div>
+
+      <BeerForm
+        beer={editing}
+        onSave={handleSave}
+        onCancel={() => setEditing(null)}
+      />
+
+      {loading ? (
+        <p className="loading">Cargando…</p>
+      ) : error ? (
+        <div className="error-message">
+          {error}
+          <br />
+          <button onClick={load}>Reintentar</button>
+        </div>
+      ) : (
+        <div className="breweries-grid">
+          {filtered.map((b) => (
+            <BeerCard
+              key={b._id}
+              beer={b}
+              onView={setView}
+              onEdit={setEditing}
+              onDelete={handleDelete}
+            />
+          ))}
+          {!filtered.length && (
+            <p className="loading">Sin resultados para “{q}”.</p>
+          )}
+        </div>
+      )}
+
+      {/* Modal Ver Información */}
+      {view && (
+        <div className="beerlist-modal" onClick={() => setView(null)}>
+          <div className="beerlist-modal-card" onClick={(e) => e.stopPropagation()}>
+            <h3 className="beerlist-modal-title">{view.nombre}</h3>
+            <p className="beerlist-modal-meta">
+              <b>Tipo:</b> {view.tipo} • <b>ABV:</b> {view.alcohol}% • <b>IBU:</b> {view.ibu}
+            </p>
+            <p className="beerlist-modal-text">{view.descripcion}</p>
+            <p className="beerlist-modal-text">
+              <b>Precio:</b> ${view.precio} • <b>Stock:</b> {view.stock}
+            </p>
+            <p className="beerlist-modal-text">
+              {view.fechaProduccion && (
+                <>
+                  <b>Producción:</b>{" "}
+                  {new Date(view.fechaProduccion).toLocaleDateString()}
+                  {"  "}
+                </>
+              )}
+              {view.fechaCaducidad && (
+                <>
+                  <b>Caducidad:</b>{" "}
+                  {new Date(view.fechaCaducidad).toLocaleDateString()}
+                </>
+              )}
+            </p>
+            {view.imagen && (
+              <img className="beerlist-modal-img" src={view.imagen} alt={view.nombre} />
+            )}
+
+            <div className="beerlist-modal-actions">
+              <button className="cta-button secondary" onClick={() => setView(null)}>
+                Cerrar
+              </button>
+              <button
+                className="cta-button primary"
+                onClick={() => {
+                  setEditing(view);
+                  setView(null);
+                }}
+              >
+                Editar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
-};
-
-export default BeerList;
+}

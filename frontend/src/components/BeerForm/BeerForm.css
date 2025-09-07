@@ -1,65 +1,95 @@
+/* --- Formulario de cerveza --- */
 .beer-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background: #f5f5f5;
-  border-radius: 8px;
-  margin-bottom: 30px;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  color: var(--text-light);
+  box-shadow: var(--shadow);
 }
 
-.beer-form h2 {
-  color: #4B0082;
-  text-align: center;
-  margin-bottom: 20px;
+/* Grid de campos */
+.beer-form .form-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
+.beer-form label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #333;
+  margin-bottom: .35rem;
+  font-weight: 700;
+  color: var(--text-light);
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.beer-form input,
+.beer-form select,
+.beer-form textarea {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  box-sizing: border-box;
+  padding: .85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
+  outline: none;
+  transition: var(--transition);
 }
 
-.form-group textarea {
-  height: 100px;
+.beer-form textarea {
+  min-height: 110px;
   resize: vertical;
 }
 
-button {
-  background-color: #4B0082;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 4px;
+.beer-form input:focus,
+.beer-form select:focus,
+.beer-form textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.25);
+}
+
+/* Acciones */
+.beer-form .form-actions {
+  display: flex;
+  gap: .6rem;
+  margin-top: .75rem;
+}
+
+/* Reutiliza tus botones globales si existen (.cta-button). 
+   Por si no, aquí hay estilos de respaldo: */
+.beer-form .cta-button {
+  padding: .9rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  font-weight: 800;
   cursor: pointer;
-  margin-right: 10px;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  transition: var(--transition);
 }
 
-button:hover {
-  background-color: #5A2D8C;
+.beer-form .cta-button.primary {
+  background: var(--primary-color);
+  color: #fff;
 }
 
-button[type="button"] {
-  background-color: #6c757d;
+.beer-form .cta-button.secondary {
+  background: transparent;
+  color: var(--text-light);
+  border-color: rgba(255,255,255,0.6);
 }
 
-button[type="button"]:hover {
-  background-color: #5a6268;
+.beer-form .cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+/* Ajustes finos */
+.beer-form .col-span-2 {
+  grid-column: 1 / -1;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .beer-form {
+    padding: .85rem;
+  }
 }

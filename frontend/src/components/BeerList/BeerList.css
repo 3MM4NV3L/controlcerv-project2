@@ -1,10 +1,109 @@
-.beer-list {
-  margin-top: 2rem;
+/* Contenedor principal */
+.beerlist {
+  padding-top: 1rem;
 }
 
-.beer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+/* Barra superior: búsqueda y modo (crear/editar) */
+.beerlist-toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
+
+.beerlist-search {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.08);
+  color: var(--text-light);
+  min-width: 280px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.beerlist-search:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255,140,0,.25);
+}
+
+.beerlist-mode {
+  color: var(--accent-color);
+  opacity: 0.95;
+}
+
+/* Modal */
+.beerlist-modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+}
+
+.beerlist-modal-card {
+  width: min(95%, 560px);
+  background: var(--card-bg);
+  border: 1px solid rgba(255,255,255,.2);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  padding: 1.25rem;
+  color: var(--text-light);
+  box-shadow: var(--shadow);
+}
+
+.beerlist-modal-title {
+  margin: 0 0 .5rem 0;
+  font-size: 1.35rem;
+  color: var(--text-light);
+}
+
+.beerlist-modal-meta {
+  margin: .25rem 0 .5rem 0;
+  color: var(--accent-color);
+}
+
+.beerlist-modal-text {
+  margin: .35rem 0;
+  color: var(--accent-color);
+}
+
+.beerlist-modal-img {
+  margin-top: .75rem;
+  border-radius: 8px;
+  max-height: 240px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.beerlist-modal-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: .5rem;
+}
+
+/* Estados */
+.loading {
+  text-align: center;
+  color: #bb9ac5;
+  font-size: 1.05rem;
+}
+
+.error-message {
+  text-align: center;
+  color: #ff6b6b;
+}
+.error-message button {
+  margin-top: .75rem;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: .5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Reutiliza tu grid de App.css (.breweries-grid) para las cards */

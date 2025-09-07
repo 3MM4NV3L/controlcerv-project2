@@ -1,75 +1,63 @@
-// Almacenamiento en memoria para demostracion
-let beers = [];
-let nextId = 1;
+const Beer = require('../models/Beer');
 
-// Obtener todas las cervezas
+// GET /api/beers
 exports.getAllBeers = async (req, res) => {
   try {
+    const { q } = req.query;
+    const filter = q
+      ? {
+          $or: [
+            { nombre: { $regex: q, $options: 'i' } },
+            { tipo: { $regex: q, $options: 'i' } },
+            { descripcion: { $regex: q, $options: 'i' } }
+          ]
+        }
+      : {};
+    const beers = await Beer.find(filter).sort('-createdAt');
     res.json(beers);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Obtener una cerveza por ID
+// GET /api/beers/:id
 exports.getBeerById = async (req, res) => {
   try {
-    const beer = beers.find(b => b.id === parseInt(req.params.id));
-    if (!beer) {
-      return res.status(404).json({ message: 'Cerveza no encontrada' });
-    }
+    const beer = await Beer.findById(req.params.id);
+    if (!beer) return res.status(404).json({ message: 'Cerveza no encontrada' });
     res.json(beer);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Crear una nueva cerveza
+// POST /api/beers
 exports.createBeer = async (req, res) => {
   try {
-    const newBeer = {
-      id: nextId++,
-      ...req.body,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-    beers.push(newBeer);
-    res.status(201).json(newBeer);
+    const beer = await Beer.create(req.body);
+    res.status(201).json(beer);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-// Actualizar una cerveza
+// PUT /api/beers/:id
 exports.updateBeer = async (req, res) => {
   try {
-    const index = beers.findIndex(b => b.id === parseInt(req.params.id));
-    if (index === -1) {
-      return res.status(404).json({ message: 'Cerveza no encontrada' });
-    }
-    
-    beers[index] = { 
-      ...beers[index], 
-      ...req.body, 
-      updatedAt: new Date(),
-      id: parseInt(req.params.id)
-    };
-    res.json(beers[index]);
+    const beer = await Beer.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    if (!beer) return res.status(404).json({ message: 'Cerveza no encontrada' });
+    res.json(beer);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-// Eliminar una cerveza
+// DELETE /api/beers/:id
 exports.deleteBeer = async (req, res) => {
   try {
-    const index = beers.findIndex(b => b.id === parseInt(req.params.id));
-    if (index === -1) {
-      return res.status(404).json({ message: 'Cerveza no encontrada' });
-    }
-    
-    const deletedBeer = beers.splice(index, 1);
-    res.json({ message: 'Cerveza eliminada correctamente', beer: deletedBeer[0] });
+    const beer = await Beer.findByIdAndDelete(req.params.id);
+    if (!beer) return res.status(404).json({ message: 'Cerveza no encontrada' });
+    res.json({ message: 'Cerveza eliminada correctamente', beer });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
