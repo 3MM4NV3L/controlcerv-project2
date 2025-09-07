@@ -1,7 +1,7 @@
 ﻿import { useEffect, useMemo, useState } from "react";
-import { getBeers, createBeer, updateBeer, deleteBeer } from "./api"; // está en src/api.js
-import BeerForm from "./BeerForm";
-import BeerCard from "./BeerCard";
+import { getBeers, createBeer, updateBeer, deleteBeer } from "../../services/api.js";
+import BeerForm from "../BeerForm/BeerForm.js";
+import BeerCard from "../BeerCard/BeerCard.js";
 import "./BeerList.css";
 
 export default function BeerList() {
@@ -27,7 +27,7 @@ export default function BeerList() {
 
   useEffect(() => {
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, []);
 
   // Búsqueda en cliente (por nombre/tipo/descr)

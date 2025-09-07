@@ -1,7 +1,6 @@
-﻿import React, { useState } from 'react';
-import BeerList from "./BeerList"; // ojo 
-
-import './App.css';
+﻿import React, { useState } from "react";
+import BeerList from "./components/Beerlist/BeerList.js";
+import "./App.css";
 
 function App() {
   const [showBeerManagement, setShowBeerManagement] = useState(false);

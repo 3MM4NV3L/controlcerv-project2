@@ -1,5 +1,5 @@
-﻿import React from 'react';
-import './BeerCard.css';
+﻿import React from "react";
+import "./BeerCard.css";
 
 const BeerCard = ({ beer, onView, onEdit, onDelete }) => {
   return (
