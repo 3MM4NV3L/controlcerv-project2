@@ -1,5 +1,5 @@
 ﻿import { useEffect, useMemo, useState } from "react";
-import { getBeers, createBeer, updateBeer, deleteBeer } from "./api";
+import { getBeers, createBeer, updateBeer, deleteBeer } from "./api"; // está en src/api.js
 import BeerForm from "./BeerForm";
 import BeerCard from "./BeerCard";
 import "./BeerList.css";

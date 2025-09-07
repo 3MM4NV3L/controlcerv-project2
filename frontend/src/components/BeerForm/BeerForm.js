@@ -1,4 +1,5 @@
 ﻿import React, { useEffect, useState } from "react";
+import "./BeerCard.css";
 
 const EMPTY = {
   nombre: "",

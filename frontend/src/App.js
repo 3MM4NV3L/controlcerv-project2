@@ -1,5 +1,6 @@
 ﻿import React, { useState } from 'react';
-import BeerList from "./BeerList";
+import BeerList from "./BeerList"; // ojo 
+
 import './App.css';
 
 function App() {
