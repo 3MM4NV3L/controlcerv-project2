@@ -1,5 +1,5 @@
 ﻿import React, { useState } from "react";
-import BeerList from "./components/Beerlist/BeerList.js";
+import BeerList from "./components/BeerList/BeerList.js";
 import "./App.css";
 
 function App() {
