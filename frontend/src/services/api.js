@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// Para desarrollo local: http://localhost:5000
-// Para producción: la URL de tu backend en Render
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://tu-backend-en-render.onrender.com/api' 
+  ? 'https://controlcerv-backend.onrender.com/api'  
   : 'http://localhost:5000/api';
 
 const api = axios.create({
