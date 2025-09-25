@@ -1,6 +1,7 @@
 ﻿import React, { useState } from "react";
 import BeerList from "./components/BeerList/BeerList.js";
 import "./App.css";
+import emailjs from "@emailjs/browser"; // Import EmailJS
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -20,18 +21,16 @@ function ContactForm() {
     setStatus("Enviando...");
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      // Enviar formulario a EmailJS
+      await emailjs.send(
+        "TU_SERVICIO_ID",      // reemplaza con tu Service ID
+        "TU_TEMPLATE_ID",      // reemplaza con tu Template ID
+        formData,              // datos del formulario como JSON
+        "TU_PUBLIC_KEY"        // reemplaza con tu Public Key
+      );
 
-      if (response.ok) {
-        setStatus("¡Formulario enviado con éxito!");
-        setFormData({ name: "", email: "", brewery: "", message: "" });
-      } else {
-        setStatus("Error al enviar. Intenta nuevamente.");
-      }
+      setStatus("¡Formulario enviado con éxito!");
+      setFormData({ name: "", email: "", brewery: "", message: "" });
     } catch (error) {
       console.error(error);
       setStatus("Error al enviar. Intenta nuevamente.");
@@ -58,16 +57,14 @@ function ContactForm() {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <button type="submit" className="cta-button primary">Enviar Mensaje</button>
-
         <a
-          href="https://wa.me/59395539504?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20una%20demo%20de%20ControlCerv"
+          href="https://wa.me/59395539504?text=Hola,%20me%20gustaría%20solicitar%20una%20demo%20de%20ControlCerv"
           className="cta-button whatsapp"
           target="_blank"
           rel="noopener noreferrer"
         >
           Contactar por WhatsApp
         </a>
-
         {status && <p style={{ color: "white", marginTop: "0.5rem" }}>{status}</p>}
       </div>
     </form>
@@ -122,9 +119,8 @@ function App() {
         </main>
       ) : (
         <>
-          {/* Hero, Features, Benefits, How It Works, Breweries, CTA Sections */}
-          {/* ... (sin cambios) */}
-
+          {/* Aquí irían Hero, Features, Benefits, How It Works, Breweries, CTA Sections */}
+          
           {/* Contact Section */}
           <section id="contact" className="contact-section">
             <div className="container">
@@ -135,7 +131,7 @@ function App() {
           </section>
 
           {/* Footer */}
-          {/* ... (sin cambios) */}
+          {/* ... sin cambios */}
         </>
       )}
     </div>
