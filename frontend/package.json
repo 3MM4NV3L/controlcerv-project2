@@ -1,7 +1,7 @@
 {
   "name": "frontend",
-  "version": "1.0.0",
-  "description": "Frontend para ContrólCerv - Sistema de gestión para cervecerías artesanales",
+  "version": "2.0.0",
+  "description": "Frontend para ControlCerv - Sistema de gestión para cervecerías artesanales",
   "main": "src/index.js",
   "scripts": {
     "build": "react-scripts build",

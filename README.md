@@ -1,6 +1,6 @@
-🍻 ContrólCerv - Sistema de Gestión para Cervecerías Artesanales
+🍻 ControlCerv - Sistema de Gestión para Cervecerías Artesanales
 
-Sistema fullstack para la gestión de inventario y ventas online de cervecerías artesanales.
+Sistema fullstack para la gestión de inventario de cervecerías artesanales.
 
 ## 🚀 Características
 - **Tienda Online**: Catálogo de productos con gestión de pedidos
