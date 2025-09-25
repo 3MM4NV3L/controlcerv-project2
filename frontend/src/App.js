@@ -20,7 +20,7 @@ function App() {
         <nav className="nav container">
           <div className="logo">
             <span className="logo-icon">🍻</span>
-            <span className="logo-text">ContrólCerv</span>
+            <span className="logo-text">ControlCerv</span>
           </div>
           <ul className="nav-menu">
             <li><a href="#features">Características</a></li>
@@ -90,34 +90,31 @@ function App() {
             </div>
           </section>
 
+      
           {/* Features Section */}
-          <section id="features" className="features">
-            <div className="container">
-              <h2 className="section-title">Características Principales</h2>
-              <div className="features-grid">
-                <div className="feature-card">
-                  <div className="feature-icon">🔄</div>
-                  <h3>Gestión FIFO Automatizada</h3>
-                  <p>Control inteligente de inventario por fechas de caducidad. Nunca más pierdas productos vencidos.</p>
-                </div>
-                <div className="feature-card">
-                  <div className="feature-icon">🛒</div>
-                  <h3>Tienda Online Integrada</h3>
-                  <p>Vende tus cervezas online con catálogo personalizado y gestión de pedidos automática.</p>
-                </div>
-                <div className="feature-card">
-                  <div className="feature-icon">⏰</div>
-                  <h3>Alertas Inteligentes</h3>
-                  <p>Notificaciones proactivas de productos próximos a vencer y stock bajo.</p>
-                </div>
-                <div className="feature-card">
-                  <div className="feature-icon">📊</div>
-                  <h3>Reportes en Tiempo Real</h3>
-                  <p>Dashboard con métricas de ventas, rotación de inventario y rendimiento de productos.</p>
-                </div>
-              </div>
-            </div>
-          </section>
+<section id="features" className="features">
+  <div className="container">
+    <h2 className="section-title">Características Principales</h2>
+    <div className="features-grid">
+      <div className="feature-card">
+        <div className="feature-icon">🔄</div>
+        <h3>Gestión FIFO Automatizada</h3>
+        <p>Control inteligente de inventario por fechas de caducidad. Nunca más pierdas productos vencidos.</p>
+      </div>
+      <div className="feature-card">
+        <div className="feature-icon">⏰</div>
+        <h3>Alertas Inteligentes</h3>
+        <p>Notificaciones proactivas de productos próximos a vencer y stock bajo.</p>
+      </div>
+      <div className="feature-card">
+        <div className="feature-icon">📊</div>
+        <h3>Reportes en Tiempo Real</h3>
+        <p>Dashboard con métricas de ventas, rotación de inventario y rendimiento de productos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
           {/* Benefits Section */}
           <section id="benefits" className="benefits">
