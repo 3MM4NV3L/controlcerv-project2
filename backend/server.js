@@ -92,8 +92,8 @@ app.get('/health', (req, res) => {
 // Ruta raíz
 app.get('/', (req, res) => {
   res.json({
-    message: 'Bienvenido a la API de ContrólCerv',
-    version: '1.0.0',
+    message: 'Bienvenido a la API de ControlCerv2',
+    version: '2.0.0',
     endpoints: {
       beers: '/api/beers',
       test: '/api/test',
