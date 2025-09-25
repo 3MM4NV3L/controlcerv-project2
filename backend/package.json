@@ -1,7 +1,7 @@
 {
   "name": "backend",
-  "version": "1.0.0",
-  "description": "Backend para ContrólCerv - Sistema de gestión para cervecerías artesanales",
+  "version": "2.0.0",
+  "description": "Backend para ControlCerv - Sistema de Gestión para Cervecerías Artesanales",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
