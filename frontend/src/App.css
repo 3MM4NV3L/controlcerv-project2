@@ -467,3 +467,22 @@ input:focus, textarea:focus {
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
+
+
+.cta-button.whatsapp {
+  background-color: #25D366;
+  color: white;
+  border-radius: 999px;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: var(--transition);
+}
+
+.cta-button.whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
