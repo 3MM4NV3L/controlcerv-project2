@@ -240,7 +240,18 @@ function App() {
                     <label htmlFor="message">Mensaje</label>
                     <textarea id="message" required></textarea>
                   </div>
-                  <button type="submit" className="cta-button primary">Enviar Mensaje</button>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+  <button type="submit" className="cta-button primary">Enviar Mensaje</button>
+
+  <a
+    href="https://wa.me/59395539504?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20una%20demo%20de%20ControlCerv"
+    className="cta-button whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Contactar por WhatsApp
+  </a>
+</div>
                 </form>
               </div>
             </div>
